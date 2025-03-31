@@ -1,0 +1,237 @@
+﻿<Window x:Class="app.View.Reservas.BuscadorAdquisiciones"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app.View.Reservas"
+        mc:Ignorable="d"
+        Title="BuscadorAdquisiciones" Height="600" Width="1000"
+        WindowStyle="none"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        AllowsTransparency="True" 
+        Background="Transparent" Loaded="Window_Loaded">
+    <Grid>
+        <!-- Outer Border with Rounded Corners -->
+        <Border CornerRadius="20" Background="White" BorderThickness="5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#5B4B8A" Offset="0"/>
+                    <GradientStop Color="#B1A7D6" Offset="0.5"/>
+                    <GradientStop Color="#D6D6E4" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+        </Border>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <StackPanel Orientation="Horizontal" Margin="0,15,10,0">
+                <Image Width="50" Margin="20 0 20 0" Source="/View/Reservas/Logo-BasketGlobal.png"/>
+                <TextBlock Text="BasketGlobal" FontSize="32" Height="50" FontWeight="Bold" Foreground="OrangeRed"/>
+
+                <Separator Margin="20 0 90 0"/>
+
+                <Border BorderBrush="Black" BorderThickness="0 0 0 3" Width="267">
+                    <TextBlock Text="Realice su adquisicion" FontSize="26" Height="34" Foreground="OrangeRed" HorizontalAlignment="Center"/>
+                </Border>
+
+                <Button Content="Volver" Height="40" Width="89" Margin="200 0 0 0" Click="Button_Click" Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2"/>
+            </StackPanel>
+
+            <!-- Main Content -->
+            <StackPanel Grid.Row="1" Width="950">
+                <TextBlock Text="Buscador productos disponibles:" FontSize="36" FontWeight="Bold" Foreground="OrangeRed"/>
+                <Border Padding="10" Width="950" Height="183" BorderBrush="#8A73C1" BorderThickness="2" CornerRadius="20">
+                    <WrapPanel>
+                        <WrapPanel Width="926" Height="159">
+
+                            <WrapPanel VerticalAlignment="Center" Width="350" Height="100">
+                                <Label Content="Categorias:" FontSize="18" FontWeight="Bold" Foreground="#5B4B8A"/>
+                                <ComboBox x:Name="comboBoxCategorias" Height="30" Width="280">
+                                    <ComboBoxItem>Balones baloncesto</ComboBoxItem>
+                                    <ComboBoxItem>Rop deportiva</ComboBoxItem>
+                                    <ComboBoxItem>Merchandising</ComboBoxItem>
+                                    <ComboBoxItem>Otros</ComboBoxItem>
+                                </ComboBox>
+                            </WrapPanel>
+
+                            <StackPanel Width="280" VerticalAlignment="Center" Height="100">
+                                <Label Content="Precio:" FontSize="18" FontWeight="Bold" Foreground="#5B4B8A"/>
+                                <Slider x:Name="sliderPrecio" Minimum="0" Maximum="800" TickFrequency="20" IsSnapToTickEnabled="True" ValueChanged="sliderPrecio_ValueChanged"/>
+                                <TextBlock x:Name="txtPrecio" HorizontalAlignment="Right" Text="Máximo: 0€" FontSize="16" FontWeight="Bold" Foreground="#5B4B8A" Margin="0 10 0 0"/>
+                            </StackPanel>
+
+                            <StackPanel Width="252" Height="159" Margin="0 0 20 0" VerticalAlignment="Center">
+                                <Button Width="120" Height="43" Margin="0 0 0 70" Content="Ofertas" FontSize="16" Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Click="btnOfertas_Click"/>
+                                <Button Width="120" Height="43" Content="Buscar" FontSize="16" Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Click="btnBuscar_Click"/>
+                            </StackPanel>
+
+                        </WrapPanel>
+                    </WrapPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Width="950">
+                <TextBlock Text="Resultados:" FontSize="36" FontWeight="Bold" Foreground="OrangeRed"/>
+
+                <DataGrid x:Name="listResultados" Height="225" ItemsSource="{Binding AllProductos}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <!-- Fondo predeterminado -->
+
+                            <Setter Property="Background" Value="#FFF1F1F1" />
+                            <Setter Property="Margin" Value="10,8" />
+                            <Setter Property="Height" Value="70" />
+                            <Setter Property="FontWeight" Value="Medium" />
+
+                            <!-- Cambiar fondo al pasar el mouse -->
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding _id}" Value="">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding _id}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFFDD7FF" />
+
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#FFFDD7FF"/>
+                                    <Setter Property="BorderBrush" Value="#CD6CE0" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                </Trigger>
+                                <!-- Alternar colores de fila -->
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="125" Header="ID" Binding="{Binding _id}" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF" />
+
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF"/>
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="125" Header="Nombre" Binding="{Binding nombre}" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF" />
+
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF"/>
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="150" Header="Categoria" Binding="{Binding categoria}" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF"/>
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="125" Header="Precio individual" Binding="{Binding precio, StringFormat=C}" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF"/>
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="125" Header="Precio Original" Binding="{Binding precio_original, StringFormat=C}" >
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#FFFDD7FF"/>
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Width="250">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <Button Click="btnAdquirir_Click" Content="Reservar" Width="120" Height="40" Background="#8A73C1" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Command="{Binding DataContext.ReservarComando, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

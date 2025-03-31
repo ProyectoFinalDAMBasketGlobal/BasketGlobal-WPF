@@ -1,0 +1,226 @@
+﻿<Window x:Class="app.View.Productos_BasketGlobal.BuscadorProductos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app.View.Productos_BasketGlobal"
+        mc:Ignorable="d"
+                Title="Buscador_Productos" Height="730" Width="1200" FontFamily="Montserrat"
+        WindowStartupLocation="CenterScreen" WindowStyle="none" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent">
+
+    <Border CornerRadius="20" Background="White" BorderThickness="5">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="OrangeRed" Offset="0"></GradientStop>
+                <GradientStop Color="#B1A7D6" Offset="0.5"></GradientStop>
+                <GradientStop Color="OrangeRed" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <StackPanel Orientation="Horizontal">
+                <DockPanel>
+                    <Image Width="50" Margin="20 0 20 0" Source="/View/Reservas/Logo-BasketGlobal.png"/>
+                    <TextBlock Text="BasketGlobal" FontSize="32" Height="39" FontWeight="Bold" Foreground="OrangeRed" TextAlignment="Center"/>
+                </DockPanel>
+
+                <Border BorderBrush="Black" BorderThickness="0.5" Margin="10,5"/>
+
+                <StackPanel VerticalAlignment="Center" Margin="0,-2,0,0">
+                    <Menu FontSize="20" Background="Transparent" Foreground="OrangeRed">
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <StackPanel  Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical" >
+                                        <TextBlock Name="txtUsuarioSession" HorizontalAlignment="Center"  Text="Username" Margin="0,0,5,0" Cursor="Hand"/>
+                                        <TextBlock Name="txtUsuarioRol" HorizontalAlignment="Center" FontSize="10" Text="Administrador" Cursor="Hand" Margin="0,0,5,0" />
+                                    </StackPanel>
+                                    <TextBlock Text="▼" FontSize="12" Foreground="Orange" Margin="10,14,0,0" Cursor="Hand"/>
+                                </StackPanel>
+                            </MenuItem.Header>
+                            <MenuItem Name="MenuCambiarContraseña" FontSize="15" Foreground="Black" Header="Cambiar Contraseña" Click="MenuCambiarContraseña_Click">
+                                <MenuItem.Icon>
+                                    <TextBlock Text="🗝️" FontSize="12" Foreground="Black"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem FontSize="15" x:Name="MenuCerrarSesion" Foreground="Black" Header="Cerrar Sesión  " Click="MenuCerrarSesion_Click" >
+                                <MenuItem.Icon>
+                                    <TextBlock Text="⏏️" FontSize="10" Foreground="Black"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem FontSize="15" x:Name="MenuApagar" Foreground="Black" Header="Apagar" Click="MenuApagar_Click"  >
+                                <MenuItem.Icon>
+                                    <TextBlock Text="⚡" FontSize="13" Foreground="Black"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+
+                <Button Content="Añadir producto" FontSize="16" Height="42" Width="150"
+                Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" VerticalAlignment="Top"
+                Margin="200,15" x:Name="btn_AddHabitacion" Click="btn_AddHabitacion_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Volver" FontSize="16" Height="42" Width="150"
+               Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" VerticalAlignment="Top"
+                Margin="0,15" x:Name="btn_Volver" Click="btn_Volver_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+
+            </StackPanel>
+
+            <!-- Buscador Section -->
+            <TextBlock Grid.Row="1" Text="Buscador de Productos:" Height="55" Width="553"
+           FontSize="48" HorizontalAlignment="Left" VerticalAlignment="Top"
+           Foreground="OrangeRed" FontWeight="Bold" Margin="30,0,0,0"/>
+
+            <Grid Grid.Row="1" Height="195" Width="1130" VerticalAlignment="Bottom"
+            HorizontalAlignment="Left" Margin="30,0" Background="#FAFDFF">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="320"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                    <!-- Categorias -->
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Label FontSize="13">Categorias</Label>
+                        <ComboBox x:Name="comboBoxHuespedes" Height="30" Width="280">
+                            <ComboBoxItem>Balones baloncesto</ComboBoxItem>
+                            <ComboBoxItem>Rop deportiva</ComboBoxItem>
+                            <ComboBoxItem>Merchandising</ComboBoxItem>
+                            <ComboBoxItem>Otros</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0.5">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Grid.Column="1" Content="Opciones" FontSize="13" Margin="15,0"/>
+                        <CheckBox x:Name="txtOp" Content="5" FontSize="13" VerticalContentAlignment="Center" Width="45">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                        <CheckBox x:Name="txtOp2" Content="10" FontSize="13" VerticalContentAlignment="Center" Width="56">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                        <CheckBox x:Name="txtOp3" Content="20" FontSize="13" VerticalContentAlignment="Center" Width="48">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                        <CheckBox x:Name="txtOp4" Content="Otros" FontSize="13" VerticalContentAlignment="Center" Width="56">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                </Border>
+
+                <!--Precio-->
+                <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="0.5">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20">
+                        <Label FontSize="13">Precio máximo producto</Label>
+                        <Slider Name="sliderPreu"
+                         Minimum="0"
+                         Maximum="1000"
+                         TickFrequency="10"
+                         IsSnapToTickEnabled="True"
+                         Value="30"
+                         Width="650"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Background="LightGray"
+                         Foreground="DarkBlue"
+                         IsDirectionReversed="False"
+                         AutoToolTipPlacement="BottomRight"
+                         AutoToolTipPrecision="0" />
+
+                        <!-- Etiqueta opcional para mostrar el valor actual -->
+                        <TextBlock Text="{Binding ElementName=sliderPreu, Path=Value}" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Botones -->
+                <Button Grid.Column="3" Height="44" Width="160"
+                Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Content="Ofertas"
+                FontSize="18" Click="Button_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Grid.Row="1" Grid.Column="3" Height="44" Width="160"
+               Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Content="Buscar"
+                FontSize="18" Click="btn_Buscar_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+
+            <!-- Resultados Section -->
+            <TextBlock Grid.Row="2" Text="Resultados:" Foreground="OrangeRed" Height="55" Width="300"
+            FontSize="48" HorizontalAlignment="Left" VerticalAlignment="Top"
+            FontWeight="Bold" Margin="30,0,0,0"/>
+
+            <Grid Grid.Row="2" Height="310" VerticalAlignment="Top" Margin="0,63,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- StackPanel para mostrar los resultados de las habitaciones -->
+                <ScrollViewer Grid.Row="1" Grid.ColumnSpan="4" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <WrapPanel x:Name="stackPanelResultados" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" />
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+    </Border>
+
+</Window>

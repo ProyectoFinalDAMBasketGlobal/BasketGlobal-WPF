@@ -1,0 +1,80 @@
+﻿<Window x:Class="app.View.Usuarios.RecordarContraseñas.RecordarContraseña"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:app.View.Usuarios.RecordarContraseñas"
+        mc:Ignorable="d"
+        Title="RecordarContraseña" Height="600" Width="1000"
+        WindowStyle="none"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        AllowsTransparency="True" 
+        Background="Transparent" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../../Dictionary1.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Border CornerRadius="20" Background="White" BorderThickness="5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0 ,1">
+                    <GradientStop Color="OrangeRed" Offset="1"></GradientStop>
+                    <GradientStop Color="#FFFFFF" Offset="0.75"></GradientStop>
+                    <GradientStop Color="OrangeRed" Offset="0.0"></GradientStop>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border CornerRadius="20,20,20,20" Grid.Column="1" Margin="30,20" BorderBrush="Black" BorderThickness="2">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="432">
+                                <Image Source="/View/Usuarios/InicioDeSesion/logo_night_days.png" Width="100" />
+                                <TextBlock FontFamily="Montserrat" FontWeight="Bold" FontSize="49" VerticalAlignment="Center"><Run Language="es-es" Text="BasketGlobal"/></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,12,0,10">
+                            <Border BorderBrush="Black" Width="50" BorderThickness="2" Margin="0,20,20,20"></Border>
+                            <TextBlock Text="He olvidado mi contraseña" VerticalAlignment="Center" Foreground="{StaticResource ColorPrimario}" Style="{StaticResource TextBlockGeneral}" />
+                            <Border BorderBrush="Black" Width="50" BorderThickness="2" Margin="20,20,0,20"></Border>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Email" Margin="0,10" Style="{StaticResource TextBlockGeneral}"/>
+                            <TextBox Name="txtEmail" Style="{StaticResource TextBoxGeneral}" TextChanged="TextBoxEmail_TextChanged"/>
+                            <TextBlock x:Name="ErrorTextEmail" Text="* Email no válido" Style="{StaticResource ErrorText}" />
+                            <TextBlock Text="Confirmar Email" Margin="0,10" Style="{StaticResource TextBlockGeneral}"/>
+                            <TextBox Name="txtEmailConfirmar" Style="{StaticResource TextBoxGeneral}" TextChanged="TextBoxEmailConfirmar_TextChanged" />
+                            <TextBlock x:Name="ErrorTextEmailConfirmar" Text="* Email no válido" Style="{StaticResource ErrorText}" />
+                            <TextBlock x:Name="ErrorTextEquals" Text="* Email no coincide" Style="{StaticResource ErrorText}" />
+
+
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Left">
+                            <Button Name="btnEnviar" IsEnabled="False" Style="{StaticResource ButtonLogin}" Click="BtnEnviar_Click" Cursor="Hand" >
+                                <!--<Image Height="100" Source="/View/Usuarios/Login/btn-login.png"   />-->
+
+                            </Button>
+                        </StackPanel>
+                        <Label Content="Volver al LogIn..." Style="{StaticResource LabelGeneral}" MouseDown="Label_MouseDown" />
+                    </StackPanel>
+                </Border>
+
+                <Border BorderBrush="Transparent"  BorderThickness="0" CornerRadius="20,0,0,20">
+                        <Border.Background>
+                            <ImageBrush  ImageSource="/View/Usuarios/RecordarContraseñas/lobby.jpg" Stretch="UniformToFill" />
+                        </Border.Background>
+                 </Border>
+       
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

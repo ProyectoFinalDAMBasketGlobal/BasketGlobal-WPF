@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\app",
+    "\\app\\app\\View",
+    "\\app\\app\\ViewModel",
+    "\\app\\app\\ViewModel\\Repositories",
+    "\\app\\app\\ViewModel\\Repositories\\RepositoryUsuarios",
+    "\\app\\app\\View\\Usuarios",
+    "\\app\\app\\View\\Usuarios\\MainUsuarios"
+  ],
+  "SelectedNode": "\\app\\app.sln",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,264 @@
+﻿using app.Models.Adquisiciones_BasketGlobal;
+using app.View.Productos_BasketGlobal;
+using app.View.Home;
+using app.View.Usuarios.MainUsuarios;
+using app.ViewModel.Adquisiciones_BasketGlobal;
+using Newtonsoft.Json;
+using System;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Text;
+using System.Windows;
+
+namespace app.View.Reservas
+{
+    /// <summary>
+    /// Lógica de interacción para MainAdquisiciones.xaml
+    /// </summary>
+    public partial class MainAdquisiciones : Window
+    {
+        public ObservableCollection<Adquisicion> Adquisiciones { get; set; }
+        private readonly AdquisicionesViewModel viewModel;
+        public MainAdquisiciones()
+        {
+            InitializeComponent();
+            viewModel = new AdquisicionesViewModel();
+            this.DataContext = viewModel;
+
+            //Reservas = new ObservableCollection<ReservaBase>();
+            //DataGridPerfilUsuarios.ItemsSource = Reservas;
+
+            txtUsuarioRol.Text = SettingsData.Default.rol;
+            txtUsuarioSession.Text = SettingsData.Default.nombre;
+        }
+
+        /// <summary>
+        /// Carga las reservas desde la API.
+        /// </summary>
+        //private async Task LoadReservationsAsync()
+        //{
+        //    try
+        //    {
+        //        using (HttpClient client = new HttpClient())
+        //        {
+        //            var response = await client.GetStringAsync("http://localhost:3505/Reserva/getAll");
+        //            var reservations = JsonConvert.DeserializeObject<List<ReservaBase>>(response);
+
+        //            Reservas = new ObservableCollection<ReservaBase>(reservations);
+        //            DataGridReservas.ItemsSource = Reservas;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Error al cargar las reservas: {ex.Message}");
+        //    }
+        //}
+
+        private void btnBuscadorAdquisicion_Click(object sender, RoutedEventArgs e)
+        {
+            BuscadorAdquisiciones ventanaBuscador = new BuscadorAdquisiciones();
+            ventanaBuscador.Show();
+            this.Close();
+        }
+
+        private async void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedReservation = DataGridAdquisiciones.SelectedItem as Adquisicion;
+
+            if (selectedReservation != null)
+            {
+                ModificarAdquisicion editarReservaWindow = new ModificarAdquisicion(selectedReservation, viewModel);
+
+                if (editarReservaWindow.ShowDialog() == true)
+                {
+                    try
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            var reservaModificada = new
+                            {
+                                selectedReservation.fecha_adquisicion,
+                                selectedReservation.estado_adquisicion
+                            };
+
+                            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"http://localhost:3505/Adquisicion/modificarAdquisicion/{selectedReservation._id}")
+                            {
+                                Content = new StringContent(JsonConvert.SerializeObject(reservaModificada), Encoding.UTF8, "application/json")
+                            };
+
+                            var response = await client.SendAsync(request);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Adquisicion actualizada con éxito.");
+                                viewModel.CargarTodasLasAdquisiciones();
+                            }
+                            else
+                            {
+                                var errorContent = await response.Content.ReadAsStringAsync();
+                                MessageBox.Show($"Error al actualizar la reserva: {errorContent}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}\nDetalles: {ex.InnerException?.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona una reserva para editar.");
+            }
+        }
+
+        private async void btnBorrar_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedReservation = DataGridAdquisiciones.SelectedItem as Adquisicion;
+
+            if (selectedReservation != null)
+            {
+                var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar esta adquisicion: '{selectedReservation._id}'?",
+                                             "Confirmar Eliminación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        using (HttpClient client = new HttpClient())
+                        {
+                            var response = await client.DeleteAsync($"http://localhost:3505/Adquisicion/eliminarAdquisicion/{selectedReservation._id}");
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Adquisicion eliminada con éxito.");
+                                viewModel.CargarTodasLasAdquisiciones();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error al eliminar la adquisicion.");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona una adquisicion para eliminar.");
+            }
+
+
+            //ReservaBase reservaSeleccionado = null;
+
+            //if (DataGridPerfilUsuarios.SelectedItem != null) { reservaSeleccionado = (ReservaBase)DataGridPerfilUsuarios.SelectedItem; }
+            //if (reservaSeleccionado == null)
+            //{
+            //    MessageBox.Show("Por favor, selecciona una usuario para borrar.", "Error !", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
+            //var result = MessageBox.Show($"¿Estás seguro de que quieres eliminar la cuenta seleccionado ?", "Confirmar eliminación", MessageBoxButton.YesNo);
+            //if (result == MessageBoxResult.Yes)
+            //{
+
+            //    var response = await viewModel.EliminarReserva(reservaSeleccionado._id.ToString());
+            //    var resultEliminar = await response.Content.ReadAsStringAsync();
+
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var status = JsonConvert.DeserializeObject(resultEliminar);
+            //        MessageBox.Show("Correctamente...", "Reserva Eliminada", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Hubo un error al eliminar la Reserva. Por favor, intenta de nuevo.");
+            //    }
+            //}
+        }
+
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedReservation = DataGridAdquisiciones.SelectedItem as Adquisicion;
+
+            if (selectedReservation != null)
+            {
+                InfoAdquisicion info = new InfoAdquisicion(selectedReservation);
+                info.Owner = this;
+                info.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona una adquisicion.");
+            }
+        }
+
+        private void MenuCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            //_viewModel.IsViewVisible = true;
+            SettingsData.Default.token = "";
+            SettingsData.Default.appToken = "";
+            SettingsData.Default.idPerfil = "";
+            SettingsData.Default.Save();
+
+            //// Verifica si LogIn ya existe y está oculto
+            //foreach (Window window in Application.Current.Windows)
+            //{
+            //    if (window is InicioDeSesion.LogIn logInView)
+            //    {
+            //        logInView.Show();
+            //        this.Close();
+            //        return;
+            //    }
+            //}
+
+            // Si no encuentra LogIn, crea una nueva instancia (en caso de que se haya cerrado completamente)
+            var newLogIn = new app.View.Usuarios.InicioDeSesion.LogIn();
+            newLogIn.Show();
+            this.Close();
+
+
+        }
+
+        private void MenuCambiarContraseña_Click(object sender, RoutedEventArgs e)
+        {
+            app.View.Usuarios.CambiarContraseña.CambiarContraseña cam = new app.View.Usuarios.CambiarContraseña.CambiarContraseña();
+            cam.Owner = this;
+            cam.ShowDialog();
+
+        }
+
+        private void MenuApagar_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            viewModel.CargarTodasLasAdquisiciones();
+        }
+
+        private void btnVolver_Click(object sender, RoutedEventArgs e)
+        {
+            Inicio ventanaMain = new Inicio();
+            ventanaMain.Show();
+            this.Close();
+        }
+
+        private void btnUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            MainUsuario mainUser = new MainUsuario();
+            mainUser.Show();
+            this.Close();
+        }
+
+        private void btnProductos_Click(object sender, RoutedEventArgs e)
+        {
+            BuscadorProductos mainHabit = new BuscadorProductos();
+            mainHabit.Show();
+            this.Close();
+        }
+    }
+}
