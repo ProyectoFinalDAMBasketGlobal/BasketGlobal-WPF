@@ -36,30 +36,30 @@ namespace app.ViewModel.Productos_BasketGlobal
 
         private readonly HttpClient httpClient = new HttpClient();
 
-        // Método para buscar habitaciones según los criterios
+        // Método para buscar productos según los criterios
         public async Task<List<Producto>> BuscarProductos(string categoria, bool cinco, bool diez, bool veinte, bool otros, double precioMaximo, bool soloOfertas)
         {
             try
             {
-                // Obtener todas las habitaciones
+                // Obtener todas los productos
                 var productosResponse = await httpClient.GetAsync("http://127.0.0.1:3505/Producto/Obtener-Productos");
 
                 if (productosResponse.IsSuccessStatusCode)
                 {
                     var productosJson = await productosResponse.Content.ReadAsStringAsync();
 
-                    // Deserializar las habitaciones directamente como una lista
+                    // Deserializar los productos directamente como una lista
                     var productos = JsonConvert.DeserializeObject<List<Producto>>(productosJson);
 
-                    // Validar que las habitaciones se cargaron correctamente
+                    // Validar que los productos se cargaron correctamente
                     if (productos == null)
                     {
-                        MessageBox.Show("Error al cargar habitaciones desde la API.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Error al cargar productos desde la API.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return new List<Producto>(); // Retornar una lista vacía en caso de error
                     }
 
-                    // Filtrar habitaciones según los criterios proporcionados
-                    var habitacionesFiltradas = productos
+                    // Filtrar productos según los criterios proporcionados
+                    var productosFiltrados = productos
                         .Where(h => h.categoria == categoria) // Filtra por categoría
                         .Where(h =>
                             (cinco && h.stock == 5) ||
@@ -70,21 +70,21 @@ namespace app.ViewModel.Productos_BasketGlobal
                         .Where(h => h.tieneOferta == soloOfertas) // Filtra por ofertas si 'soloOfertas' es true
                         .ToList();
 
-                    // Mostrar cuántas habitaciones quedan disponibles
-                    MessageBox.Show($"Habitaciones disponibles tras filtro: {habitacionesFiltradas.Count}", "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Mostrar cuántos productos quedan disponibles
+                    MessageBox.Show($"Productos disponibles tras filtro: {productosFiltrados.Count}", "Resultado", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    return habitacionesFiltradas;
+                    return productosFiltrados;
                 }
                 else
                 {
-                    MessageBox.Show("Error al obtener habitaciones. No se pudo conectar con la API.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error al obtener productos. No se pudo conectar con la API.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return new List<Producto>(); // Retornar una lista vacía en caso de error
                 }
             }
             catch (Exception ex)
             {
                 // Manejar excepciones y mostrar mensajes de error
-                MessageBox.Show($"Error al buscar habitaciones: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error al buscar productos: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return new List<Producto>(); // Retornar una lista vacía en caso de error
             }
         }
