@@ -23,6 +23,7 @@ namespace app.View.Productos_BasketGlobal
         public bool Estado { get; private set; }
         public bool tieneOferta { get; private set; }
         public string ImagenBase64 { get; private set; }
+        
         public ModificarProducto(string nombre, string categoria, string marca, int capacidad, string descripcion, string origen, double precio, double precioOriginal, bool estado, string imagenBase64)
         {
             InitializeComponent();
