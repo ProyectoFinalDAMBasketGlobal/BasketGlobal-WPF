@@ -94,7 +94,7 @@
                         </Style>
                     </ComboBox.Resources>
                     <ComboBoxItem>Balones baloncesto</ComboBoxItem>
-                    <ComboBoxItem>Rop deportiva</ComboBoxItem>
+                    <ComboBoxItem>Ropa deportiva</ComboBoxItem>
                     <ComboBoxItem>Merchandising</ComboBoxItem>
                     <ComboBoxItem>Otros</ComboBoxItem>
                 </ComboBox>
