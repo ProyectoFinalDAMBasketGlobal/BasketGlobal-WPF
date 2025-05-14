@@ -1,4 +1,4 @@
-﻿using app.Models.Productos_BasketGlobal;
+using app.Models.Productos_BasketGlobal;
 using app.Models.Adquisiciones_BasketGlobal;
 using app.View.Home;
 using app.ViewModel.Productos_BasketGlobal;
@@ -72,7 +72,7 @@ namespace app.View.Productos_BasketGlobal
 
 
         // Evento del botón "Añadir Producto"
-        private void btn_AddHabitacion_Click(object sender, RoutedEventArgs e)
+        private void btn_AddProducto_Click(object sender, RoutedEventArgs e)
         {
             AñadirProducto employeeWindow = new AñadirProducto();
             employeeWindow.Show();
@@ -83,7 +83,7 @@ namespace app.View.Productos_BasketGlobal
         private async void btn_Buscar_Click(object sender, RoutedEventArgs e)
         {
             // Recoger los valores del formulario
-            string categoria = ((ComboBoxItem)comboBoxHuespedes.SelectedItem).Content.ToString();
+            string categoria = ((ComboBoxItem)comboBoxCategorias.SelectedItem).Content.ToString();
             double precioMaximo = Convert.ToDouble(sliderPreu.Value);
 
             // Verificar si los valores son correctos
@@ -102,11 +102,11 @@ namespace app.View.Productos_BasketGlobal
             var viewModel = new ProductosViewModel();
 
 
-            // Buscar habitaciones usando la API
-            var habitacionesEncontradas = await viewModel.BuscarProductos(categoria, cinco, diez, veinte, otros, precioMaximo, false);
+            // Buscar productos usando la API
+            var productosEncontrados = await viewModel.BuscarProductos(categoria, cinco, diez, veinte, otros, precioMaximo, false);
 
             // Mostrar resultados
-            MostrarResultados(habitacionesEncontradas);
+            MostrarResultados(productosEncontrados);
         }
 
 
@@ -140,7 +140,7 @@ namespace app.View.Productos_BasketGlobal
             foreach (var producto in productos)
             {
                 // Usamos un Border para permitir Padding
-                var borderHabitacion = new Border
+                var borderProducto = new Border
                 {
                     Width = 200, // Definimos un ancho para que se ajusten mejor en el WrapPanel
                     Margin = new Thickness(10),
@@ -151,7 +151,7 @@ namespace app.View.Productos_BasketGlobal
                     BorderThickness = new Thickness(1)
                 };
 
-                var stackPanelHabitacion = new StackPanel
+                var stackPanelProducto = new StackPanel
                 {
                     VerticalAlignment = VerticalAlignment.Bottom
                 };
@@ -199,7 +199,6 @@ namespace app.View.Productos_BasketGlobal
                 };
                 precio.Children.Add(precioActual);
 
-                // Estado de la habitación
                 var estadoLabel = new Label
                 {
                     Content = producto.estado ? "Estado: Activa" : "Estado: Baja",
@@ -243,7 +242,7 @@ namespace app.View.Productos_BasketGlobal
                     }
 
                     // Llamar a la función de edición solo si no hay adquisiciones pendientes
-                    EditarHabitacion(producto);
+                    EditarProducto(producto);
                 };
 
                 // Botón para eliminar con símbolo y forma circular
@@ -272,7 +271,7 @@ namespace app.View.Productos_BasketGlobal
                     }
 
                     // Llamar a la función de eliminación solo si no hay adquisiciones pendientes
-                    EliminarHabitacion(producto);
+                    EliminarProducto(producto);
                 };
 
                 // Añadir los botones al StackPanel
@@ -280,17 +279,17 @@ namespace app.View.Productos_BasketGlobal
                 stackPanelBotones.Children.Add(botonEliminar);
 
                 // Añadir los otros controles al StackPanel principal
-                stackPanelHabitacion.Children.Add(imagen);
-                stackPanelHabitacion.Children.Add(nombre);
-                stackPanelHabitacion.Children.Add(precio);
-                stackPanelHabitacion.Children.Add(estadoLabel);
-                stackPanelHabitacion.Children.Add(stackPanelBotones);  // Agregar el StackPanel con los botones
+                stackPanelProducto.Children.Add(imagen);
+                stackPanelProducto.Children.Add(nombre);
+                stackPanelProducto.Children.Add(precio);
+                stackPanelProducto.Children.Add(estadoLabel);
+                stackPanelProducto.Children.Add(stackPanelBotones);  // Agregar el StackPanel con los botones
 
                 // Añadir el StackPanel al Border
-                borderHabitacion.Child = stackPanelHabitacion;
+                borderProducto.Child = stackPanelProducto;
 
                 // Añadir el Border al WrapPanel
-                wrapPanelResultados.Children.Add(borderHabitacion);
+                wrapPanelResultados.Children.Add(borderProducto);
             }
 
         }
@@ -307,8 +306,8 @@ namespace app.View.Productos_BasketGlobal
             return bitmapImage;
         }
 
-        // Método para editar una habitación
-        private async void EditarHabitacion(Producto producto)
+        // Método para editar un producto
+        private async void EditarProducto(Producto producto)
         {
             double precio = (double)producto.precio;
             double precioOriginal = (double)producto.precio_original; // Asumiendo que tienes un campo para el precio original
@@ -411,7 +410,7 @@ namespace app.View.Productos_BasketGlobal
         }
 
 
-        private async void EliminarHabitacion(Producto producto)
+        private async void EliminarProducto(Producto producto)
         {
 
             if (producto == null)
@@ -457,7 +456,7 @@ namespace app.View.Productos_BasketGlobal
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            string categoria = ((ComboBoxItem)comboBoxHuespedes.SelectedItem).Content.ToString();
+            string categoria = ((ComboBoxItem)comboBoxCategorias.SelectedItem).Content.ToString();
             double precioMaximo = Convert.ToDouble(sliderPreu.Value);
 
             if (string.IsNullOrEmpty(categoria))
@@ -475,10 +474,10 @@ namespace app.View.Productos_BasketGlobal
             var viewModel = new ProductosViewModel();
 
             // Buscar habitaciones solo con ofertas
-            var habitacionesEncontradas = await viewModel.BuscarProductos(categoria, cinco, diez, veinte, otros, precioMaximo, true);
+            var productosEncontrados = await viewModel.BuscarProductos(categoria, cinco, diez, veinte, otros, precioMaximo, true);
 
             // Mostrar resultados
-            MostrarResultados(habitacionesEncontradas);
+            MostrarResultados(productosEncontrados);
         }
 
         private void btn_Volver_Click(object sender, RoutedEventArgs e)
