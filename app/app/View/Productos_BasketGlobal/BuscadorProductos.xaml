@@ -68,7 +68,7 @@
 
                 <Button Content="Añadir producto" FontSize="16" Height="42" Width="150"
                 Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" VerticalAlignment="Top"
-                Margin="200,15" x:Name="btn_AddHabitacion" Click="btn_AddHabitacion_Click">
+                Margin="200,15" x:Name="btn_AddProducto" Click="btn_AddProducto_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="10"/>
