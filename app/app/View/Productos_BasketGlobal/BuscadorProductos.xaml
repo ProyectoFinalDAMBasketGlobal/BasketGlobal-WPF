@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app.View.Productos_BasketGlobal"
         mc:Ignorable="d"
-                Title="Buscador_Productos" Height="730" Width="1200" FontFamily="Montserrat"
+        Title="Buscador_Productos" Height="730" Width="1200" FontFamily="Montserrat"
         WindowStartupLocation="CenterScreen" WindowStyle="none" ResizeMode="NoResize"
         AllowsTransparency="True" Background="Transparent">
 
@@ -111,9 +111,9 @@
                     <!-- Categorias -->
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
                         <Label FontSize="13">Categorias</Label>
-                        <ComboBox x:Name="comboBoxHuespedes" Height="30" Width="280">
+                        <ComboBox x:Name="comboBoxCategorias" Height="30" Width="280">
                             <ComboBoxItem>Balones baloncesto</ComboBoxItem>
-                            <ComboBoxItem>Rop deportiva</ComboBoxItem>
+                            <ComboBoxItem>Ropa deportiva</ComboBoxItem>
                             <ComboBoxItem>Merchandising</ComboBoxItem>
                             <ComboBoxItem>Otros</ComboBoxItem>
                         </ComboBox>
