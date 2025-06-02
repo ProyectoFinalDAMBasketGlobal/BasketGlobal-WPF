@@ -57,7 +57,7 @@
                     <!--Menu superior-->
                     <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" >
                         <DockPanel>
-                            <Image  Height="40" VerticalAlignment="Top" Margin="10,15,0,0" Source="/View/Usuarios/MainUsuarios/logo_night_days.png" Cursor="Hand" MouseDown="Image_MouseDown"  />
+                            <Image  Height="40" VerticalAlignment="Top" Margin="10,15,0,0" Source="/View/Reservas/Logo-BasketGlobal.png" Cursor="Hand" MouseDown="Image_MouseDown"  />
                             <Label Content="BasketGlobal" FontSize="27" Margin="5,10,40,0" FontWeight="Bold" MouseDown="TextBlock_MouseDown" Cursor="Hand" />
                         </DockPanel>
                         <Button x:Name="btnUsuarios" Content="Usuarios" Style="{StaticResource BarSide}"/>
