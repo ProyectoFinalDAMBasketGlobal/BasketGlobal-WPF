@@ -62,7 +62,7 @@
                 <Border CornerRadius="20,20,20,20" Grid.Column="1" Margin="30,20" BorderBrush="Black" BorderThickness="2">
                     <StackPanel Margin="10">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Image Source="/View/Usuarios/InicioDeSesion/logo_night_days.png" Width="100" />
+                            <Image Source="/View/Reservas/Logo-BasketGlobal.png" Width="100" />
                             <TextBlock FontFamily="Montserrat" FontWeight="Bold" FontSize="48" VerticalAlignment="Center" TextAlignment="Center" Width="320"><Run Language="es-es" Text="BasketGlobal"/></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,12,0,10">
