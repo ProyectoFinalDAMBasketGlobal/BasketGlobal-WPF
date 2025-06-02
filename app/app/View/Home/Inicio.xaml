@@ -69,7 +69,7 @@
                         </Button>
                     </Grid>
 
-                    <Image  Grid.Row="2" HorizontalAlignment="Center" Source="/View/Home/logo_night_days.png" Width="230" Margin="0,0,0,140"/>
+                    <Image  Grid.Row="2" HorizontalAlignment="Center" Source="/View/Reservas/Logo-BasketGlobal.png" Width="230" Margin="0,0,0,140"/>
 
                     <Border x:Name="menu" Background="#CD6CE0" Grid.Row="3" CornerRadius="20" Margin="50,20">
                         <Grid>
