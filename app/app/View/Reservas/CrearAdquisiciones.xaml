@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:app.View.Reservas"
         mc:Ignorable="d"
-        Title="CrearReservas" Height="650" Width="1000"
+        Title="CrearAdquisiciones" Height="650" Width="1000"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
@@ -54,7 +54,7 @@
                 <!-- Room Information -->
                 <StackPanel Margin="20" VerticalAlignment="Top" Width="380">
                     <Border BorderBrush="Black" BorderThickness="2" Width="180" Height="230" Margin="0 0 0 15">
-                        <Image x:Name="imgHabitacion"/>
+                        <Image x:Name="imgProducto"/>
                     </Border>
                     <TextBlock x:Name="txtNombreProducto" Width="200" FontSize="32" FontWeight="Bold" Foreground="#5B4B8A"/>
                     <WrapPanel Width="300" Margin="0 50 0 0">
