@@ -1,10 +1,12 @@
-﻿using app.Models.Productos_BasketGlobal;
+using app.Models.Productos_BasketGlobal;
 using System;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Windows;
 using app.Models.Adquisiciones_BasketGlobal;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace app.View.Reservas
 {
@@ -19,6 +21,16 @@ namespace app.View.Reservas
             InitializeComponent();
             _producto = producto;
 
+            if (!string.IsNullOrEmpty(_producto.imagenBase64))
+            {
+                imgProducto.Source = ConvertBase64ToImage(_producto.imagenBase64);
+            }
+            else
+            {
+                imgProducto.Source = new BitmapImage(new Uri("pack://application:,,,/View/Reservas/Logo-BasketGlobal.png", UriKind.Absolute));
+                // Imagen predeterminada
+            }
+           
             txtNombreProducto.Text = _producto._id;
             txtPrecioProducto.Text = $"{_producto.precio}€";
         }
@@ -122,6 +134,18 @@ namespace app.View.Reservas
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private BitmapImage ConvertBase64ToImage(string base64String)
+        {
+            // Convertir Base64 a imagen
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            MemoryStream stream = new MemoryStream(imageBytes);
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = stream;
+            bitmapImage.EndInit();
+            return bitmapImage;
         }
     }
 }
