@@ -179,7 +179,7 @@
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="125" Header="Precio individual" Binding="{Binding precio, StringFormat=C}" >
+                        <DataGridTextColumn Width="125" Header="Precio individual" Binding="{Binding precio, StringFormat={}{0:C}, ConverterCulture='es-ES'}" >
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="VerticalAlignment" Value="Center"/>
@@ -199,7 +199,7 @@
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="125" Header="Precio Original" Binding="{Binding precio_original, StringFormat=C}" >
+                        <DataGridTextColumn Width="125" Header="Precio Original" Binding="{Binding precio_original, StringFormat={}{0:C}, ConverterCulture='es-ES'}" >
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="VerticalAlignment" Value="Center"/>
@@ -223,7 +223,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center">
-                                        <Button Click="btnAdquirir_Click" Content="Reservar" Width="120" Height="40" Background="#8A73C1" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Command="{Binding DataContext.ReservarComando, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
+                                        <Button Click="btnAdquirir_Click" Content="Comprar" Width="120" Height="40" Background="#8A73C1" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Command="{Binding DataContext.ReservarComando, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
                                         </Button>
                                     </StackPanel>
                                 </DataTemplate>
