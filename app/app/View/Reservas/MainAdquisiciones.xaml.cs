@@ -25,34 +25,9 @@ namespace app.View.Reservas
             viewModel = new AdquisicionesViewModel();
             this.DataContext = viewModel;
 
-            //Reservas = new ObservableCollection<ReservaBase>();
-            //DataGridPerfilUsuarios.ItemsSource = Reservas;
-
             txtUsuarioRol.Text = SettingsData.Default.rol;
             txtUsuarioSession.Text = SettingsData.Default.nombre;
         }
-
-        /// <summary>
-        /// Carga las reservas desde la API.
-        /// </summary>
-        //private async Task LoadReservationsAsync()
-        //{
-        //    try
-        //    {
-        //        using (HttpClient client = new HttpClient())
-        //        {
-        //            var response = await client.GetStringAsync("http://localhost:3505/Reserva/getAll");
-        //            var reservations = JsonConvert.DeserializeObject<List<ReservaBase>>(response);
-
-        //            Reservas = new ObservableCollection<ReservaBase>(reservations);
-        //            DataGridReservas.ItemsSource = Reservas;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Error al cargar las reservas: {ex.Message}");
-        //    }
-        //}
 
         private void btnBuscadorAdquisicion_Click(object sender, RoutedEventArgs e)
         {
@@ -127,8 +102,9 @@ namespace app.View.Reservas
                     {
                         using (HttpClient client = new HttpClient())
                         {
-                            var response = await client.DeleteAsync($"http://localhost:3505/Adquisicion/eliminarAdquisicion/{selectedReservation._id}");
-
+                            var response = await client.DeleteAsync($"http://localhost:3505/Adquisicion/eliminarAdquisicion/{selectedReservation.id_usu}/{selectedReservation.id_prod}");
+                        
+                        
                             if (response.IsSuccessStatusCode)
                             {
                                 MessageBox.Show("Adquisicion eliminada con éxito.");
@@ -136,7 +112,7 @@ namespace app.View.Reservas
                             }
                             else
                             {
-                                MessageBox.Show("Error al eliminar la adquisicion.");
+                                MessageBox.Show($"Error al eliminar la adquisicion. Código de estado: {response.StatusCode}");
                             }
                         }
                     }
