@@ -1,4 +1,4 @@
-﻿<Window x:Class="app.View.Home.Inicio"
+<Window x:Class="app.View.Home.Inicio"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -69,9 +69,9 @@
                         </Button>
                     </Grid>
 
-                    <Image  Grid.Row="2" HorizontalAlignment="Center" Source="/View/Reservas/Logo-BasketGlobal.png" Width="230" Margin="0,0,0,140"/>
+                    <Image  Grid.Row="2" HorizontalAlignment="Center" Source="/View/Reservas/Logo-BasketGlobal.png" Width="290" Margin="0,18,0,28"/>
 
-                    <Border x:Name="menu" Background="#CD6CE0" Grid.Row="3" CornerRadius="20" Margin="50,20">
+                    <Border x:Name="menu" Background="DarkOrange" Grid.Row="3" CornerRadius="20" Margin="50,20">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -79,7 +79,7 @@
                                 <ColumnDefinition/>
 
                             </Grid.ColumnDefinitions>
-                          
+
                             <Button Template="{DynamicResource BtnsInicio}" x:Name="btnUsuarios" Grid.Column="0" Content="Usuarios" Foreground="White" Style="{StaticResource BarSide}" Click="btnUsuarios_Click"/>
                             <Button Template="{DynamicResource BtnsInicio}" x:Name="btnReservas" Grid.Column="1"  Content="Adquirir" Foreground="White" Style="{StaticResource BarSide}" Height="30" Margin="107,15,87,0" VerticalAlignment="Top" Click="btnReservas_Click"/>
                             <Button Template="{DynamicResource BtnsInicio}" x:Name="btnHabitaciones" Grid.Column="2"  Content="Productos" Foreground="White"  Style="{StaticResource BarSide}" Click="btnHabitaciones_Click"/>
