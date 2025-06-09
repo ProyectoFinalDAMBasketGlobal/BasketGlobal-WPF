@@ -452,7 +452,7 @@ namespace app.View.Productos_BasketGlobal
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al eliminar la habitación: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error al eliminar el producto: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
