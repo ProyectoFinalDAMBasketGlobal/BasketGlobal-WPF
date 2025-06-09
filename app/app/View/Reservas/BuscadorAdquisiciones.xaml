@@ -1,4 +1,4 @@
-﻿<Window x:Class="app.View.Reservas.BuscadorAdquisiciones"
+<Window x:Class="app.View.Reservas.BuscadorAdquisiciones"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -16,9 +16,9 @@
         <Border CornerRadius="20" Background="White" BorderThickness="5">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#5B4B8A" Offset="0"/>
-                    <GradientStop Color="#B1A7D6" Offset="0.5"/>
-                    <GradientStop Color="#D6D6E4" Offset="1"/>
+                    <GradientStop Color="OrangeRed" Offset="1"></GradientStop>
+                    <GradientStop Color="Violet" Offset="0.75"></GradientStop>
+                    <GradientStop Color="OrangeRed" Offset="0.0"></GradientStop>
                 </LinearGradientBrush>
             </Border.BorderBrush>
         </Border>
@@ -47,7 +47,7 @@
             <!-- Main Content -->
             <StackPanel Grid.Row="1" Width="950">
                 <TextBlock Text="Buscador productos disponibles:" FontSize="36" FontWeight="Bold" Foreground="OrangeRed"/>
-                <Border Padding="10" Width="950" Height="183" BorderBrush="#8A73C1" BorderThickness="2" CornerRadius="20">
+                <Border Padding="10" Width="950" Height="183" BorderBrush="#8A73C1" BorderThickness="3" Background="LightGray" CornerRadius="20">
                     <WrapPanel>
                         <WrapPanel Width="926" Height="159">
 
@@ -55,7 +55,7 @@
                                 <Label Content="Categorias:" FontSize="18" FontWeight="Bold" Foreground="#5B4B8A"/>
                                 <ComboBox x:Name="comboBoxCategorias" Height="30" Width="280">
                                     <ComboBoxItem>Balones baloncesto</ComboBoxItem>
-                                    <ComboBoxItem>Rop deportiva</ComboBoxItem>
+                                    <ComboBoxItem>Ropa deportiva</ComboBoxItem>
                                     <ComboBoxItem>Merchandising</ComboBoxItem>
                                     <ComboBoxItem>Otros</ComboBoxItem>
                                 </ComboBox>
@@ -68,8 +68,23 @@
                             </StackPanel>
 
                             <StackPanel Width="252" Height="159" Margin="0 0 20 0" VerticalAlignment="Center">
-                                <Button Width="120" Height="43" Margin="0 0 0 70" Content="Ofertas" FontSize="16" Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Click="btnOfertas_Click"/>
-                                <Button Width="120" Height="43" Content="Buscar" FontSize="16" Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Click="btnBuscar_Click"/>
+                                <Button Width="120" Height="43" Margin="0 0 0 70" Content="Ofertas" FontSize="16" Foreground="Black" BorderBrush="Orange" BorderThickness="2" Click="btnOfertas_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                                <Button Width="120" Height="43" Content="Buscar" FontSize="16" Background="OrangeRed" Foreground="White" BorderBrush="#5B4B8A" BorderThickness="2" Click="btnBuscar_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
                             </StackPanel>
 
                         </WrapPanel>
@@ -179,7 +194,7 @@
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Width="125" Header="Precio individual" Binding="{Binding precio, StringFormat={}{0:C}, ConverterCulture='es-ES'}" >
+                        <DataGridTextColumn Width="125" Header="Precio" Binding="{Binding precio, StringFormat={}{0:C}, ConverterCulture='es-ES'}" >
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="VerticalAlignment" Value="Center"/>
