@@ -201,13 +201,18 @@ namespace app.View.Productos_BasketGlobal
 
                 var estadoLabel = new Label
                 {
-                    Content = producto.estado ? "Estado: Activa" : "Estado: Baja",
+                    Content =
+                    producto.estado || !producto.estado && producto.stock == 0 ? "Estado: No disponible" :
+                    !producto.estado ? "Estado: Descatalogado" :
+                    "Estado: Disponible",
                     FontSize = 14,
-                    Foreground = producto.estado ? Brushes.Green : Brushes.Red,
+                    Foreground =
+                    producto.estado || !producto.estado && producto.stock == 0 ? Brushes.Red :
+                    !producto.estado ? Brushes.Orange : Brushes.Green,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Margin = new Thickness(0, 5, 0, 5)
                 };
-
+                
                 // Crear un StackPanel para los botones y establecer la orientación horizontal
                 var stackPanelBotones = new StackPanel
                 {
