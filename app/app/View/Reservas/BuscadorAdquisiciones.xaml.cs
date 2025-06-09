@@ -1,4 +1,4 @@
-﻿using app.Models.Productos_BasketGlobal;
+using app.Models.Productos_BasketGlobal;
 using app.Models.Adquisiciones_BasketGlobal;
 using app.ViewModel.Productos_BasketGlobal;
 using app.ViewModel.Adquisiciones_BasketGlobal;
@@ -40,13 +40,13 @@ namespace app.View.Reservas
                 // Verificar si las colecciones están inicializadas
                 if (_viewModelP.AllProductos == null || !_viewModelP.AllProductos.Any())
                 {
-                    MessageBox.Show("No hay habitaciones disponibles para buscar.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("No hay productos disponibles para buscar.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 if (_viewModelA.AllAdquisiciones == null)
                 {
-                    MessageBox.Show("No se han cargado las reservas.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("No se han cargado las adquisiciones.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -107,13 +107,20 @@ namespace app.View.Reservas
 
             if (selectedProd != null)
             {
-                CrearAdquisiciones ventanaCrear = new CrearAdquisiciones(selectedProd);
-                ventanaCrear.Owner = this;
-                ventanaCrear.ShowDialog();
+                if (selectedProd.stock == 0)
+                {
+                    MessageBox.Show("Este producto no está disponible.");
+                }
+                else
+                {
+                    CrearAdquisiciones ventanaCrear = new CrearAdquisiciones(selectedProd);
+                    ventanaCrear.Owner = this;
+                    ventanaCrear.ShowDialog();
+                }
             }
             else
             {
-                MessageBox.Show("Por favor, selecciona una reserva.");
+                MessageBox.Show("Por favor, selecciona un producto.");
             }
         }
 
