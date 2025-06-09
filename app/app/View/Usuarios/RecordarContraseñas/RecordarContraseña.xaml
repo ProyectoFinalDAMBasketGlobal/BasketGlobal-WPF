@@ -70,7 +70,7 @@
 
                 <Border BorderBrush="Transparent"  BorderThickness="0" CornerRadius="20,0,0,20">
                         <Border.Background>
-                            <ImageBrush  ImageSource="/View/Usuarios/RecordarContraseñas/BasketGlobal.png" Stretch="UniformToFill" />
+                            <ImageBrush  ImageSource="/View/Usuarios/InicioDeSesion/BasketGlobal.png" Stretch="UniformToFill" />
                         </Border.Background>
                  </Border>
        
