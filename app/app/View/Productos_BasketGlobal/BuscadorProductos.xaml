@@ -107,7 +107,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0.5">
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Background="LightGray">
                     <!-- Categorias -->
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
                         <Label FontSize="13">Categorias</Label>
@@ -120,7 +120,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0.5">
+                <Border Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Black" Background="LightGray" BorderThickness="1">
                     <StackPanel Orientation="Horizontal">
                         <Label Grid.Column="1" Content="Opciones" FontSize="13" Margin="15,0" Height="25"/>
                         <CheckBox x:Name="txtOp" Content="5" FontSize="13" VerticalContentAlignment="Center" Width="45" Height="42">
@@ -155,20 +155,18 @@
                 </Border>
 
                 <!--Precio-->
-                <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="0.5">
+                <Border Grid.Row="1" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="1" Background="LightGray">
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20">
                         <Label FontSize="13">Precio máximo producto</Label>
                         <Slider Name="sliderPreu"
                          Minimum="0"
-                         Maximum="1000"
-                         TickFrequency="10"
+                         Maximum="200"
+                         TickFrequency="20"
                          IsSnapToTickEnabled="True"
-                         Value="30"
-                         Width="650"
+                         Value="100"
+                         Width="575"
                          HorizontalAlignment="Center"
-                         VerticalAlignment="Center"
                          Background="LightGray"
-                         Foreground="DarkBlue"
                          IsDirectionReversed="False"
                          AutoToolTipPlacement="BottomRight"
                          AutoToolTipPrecision="0" />
