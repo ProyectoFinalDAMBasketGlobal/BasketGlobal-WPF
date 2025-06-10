@@ -78,7 +78,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Border para el botón Usuarios -->
+                        <!-- Border para el boton Usuarios -->
                         <Border Background="DarkOrange" CornerRadius="20" Grid.Column="0" Margin="5,0,5,0">
                             <Button Template="{DynamicResource BtnsInicio}"
                             x:Name="btnUsuarios"
@@ -88,7 +88,7 @@
                             Click="btnUsuarios_Click"/>
                         </Border>
 
-                        <!-- Border para el botón Adquirir -->
+                        <!-- Border para el boton Adquirir -->
                         <Border Background="DarkOrange" CornerRadius="20" Grid.Column="1" Margin="5,0,5,0">
                             <Button Template="{DynamicResource BtnsInicio}"
                             x:Name="btnAdquisiciones"
@@ -101,7 +101,7 @@
                             Click="btnAdquisiciones_Click"/>
                         </Border>
 
-                        <!-- Border para el botón Productos -->
+                        <!-- Border para el boton Productos -->
                         <Border Background="DarkOrange" CornerRadius="20" Grid.Column="2" Margin="5,0,5,0">
                             <Button Template="{DynamicResource BtnsInicio}"
                             x:Name="btnProductos"
