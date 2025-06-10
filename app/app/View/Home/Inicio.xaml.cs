@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using app.View.Productos_BasketGlobal;
 using app.View.Reservas;
 using app.View.Usuarios.InicioDeSesion;
@@ -64,14 +64,14 @@ namespace app.View.Home
             }
         }
 
-        private void btnReservas_Click(object sender, RoutedEventArgs e)
+        private void btnAdquisiciones_Click(object sender, RoutedEventArgs e)
         {
-            MainAdquisiciones mainReservas = new MainAdquisiciones(); 
-            mainReservas.Show();
+            MainAdquisiciones main = new MainAdquisiciones(); 
+            main.Show();
             this.Close();   
         }
 
-        private void btnHabitaciones_Click(object sender, RoutedEventArgs e)
+        private void btnProductos_Click(object sender, RoutedEventArgs e)
         {
             BuscadorProductos main  = new BuscadorProductos();
             main.Show();
