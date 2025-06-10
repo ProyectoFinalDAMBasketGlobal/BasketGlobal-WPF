@@ -1,4 +1,4 @@
-﻿using app.Models.Adquisiciones_BasketGlobal;
+using app.Models.Adquisiciones_BasketGlobal;
 using app.View.Productos_BasketGlobal;
 using app.View.Home;
 using app.View.Usuarios.MainUsuarios;
@@ -38,11 +38,11 @@ namespace app.View.Reservas
 
         private async void btnEditar_Click(object sender, RoutedEventArgs e)
         {
-            var selectedReservation = DataGridAdquisiciones.SelectedItem as Adquisicion;
+            var selectAdquisicion = DataGridAdquisiciones.SelectedItem as Adquisicion;
 
-            if (selectedReservation != null)
+            if (selectAdquisicion != null)
             {
-                ModificarAdquisicion editarReservaWindow = new ModificarAdquisicion(selectedReservation, viewModel);
+                ModificarAdquisicion editarReservaWindow = new ModificarAdquisicion(selectAdquisicion, viewModel);
 
                 if (editarReservaWindow.ShowDialog() == true)
                 {
@@ -52,11 +52,11 @@ namespace app.View.Reservas
                         {
                             var reservaModificada = new
                             {
-                                selectedReservation.fecha_adquisicion,
-                                selectedReservation.estado_adquisicion
+                                selectAdquisicion.fecha_adquisicion,
+                                selectAdquisicion.estado_adquisicion
                             };
 
-                            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"http://localhost:3505/Adquisicion/modificarAdquisicion/{selectedReservation._id}")
+                            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"http://localhost:3505/Adquisicion/modificarAdquisicion/{selectAdquisicion._id}")
                             {
                                 Content = new StringContent(JsonConvert.SerializeObject(reservaModificada), Encoding.UTF8, "application/json")
                             };
@@ -71,7 +71,7 @@ namespace app.View.Reservas
                             else
                             {
                                 var errorContent = await response.Content.ReadAsStringAsync();
-                                MessageBox.Show($"Error al actualizar la reserva: {errorContent}");
+                                MessageBox.Show($"Error al actualizar la adquisicion: {errorContent}");
                             }
                         }
                     }
@@ -83,17 +83,17 @@ namespace app.View.Reservas
             }
             else
             {
-                MessageBox.Show("Por favor, selecciona una reserva para editar.");
+                MessageBox.Show("Por favor, selecciona adquisicion para editar.");
             }
         }
 
         private async void btnBorrar_Click(object sender, RoutedEventArgs e)
         {
-            var selectedReservation = DataGridAdquisiciones.SelectedItem as Adquisicion;
+            var selectAdquisicion = DataGridAdquisiciones.SelectedItem as Adquisicion;
 
-            if (selectedReservation != null)
+            if (selectAdquisicion != null)
             {
-                var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar esta adquisicion: '{selectedReservation._id}'?",
+                var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar esta adquisicion: '{selectAdquisicion._id}'?",
                                              "Confirmar Eliminación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
@@ -102,7 +102,7 @@ namespace app.View.Reservas
                     {
                         using (HttpClient client = new HttpClient())
                         {
-                            var response = await client.DeleteAsync($"http://localhost:3505/Adquisicion/eliminarAdquisicion/{selectedReservation.id_usu}/{selectedReservation.id_prod}");
+                            var response = await client.DeleteAsync($"http://localhost:3505/Adquisicion/eliminarAdquisicion/{selectAdquisicion.id_usu}/{selectAdquisicion.id_prod}");
                         
                         
                             if (response.IsSuccessStatusCode)
@@ -127,41 +127,15 @@ namespace app.View.Reservas
                 MessageBox.Show("Por favor, selecciona una adquisicion para eliminar.");
             }
 
-
-            //ReservaBase reservaSeleccionado = null;
-
-            //if (DataGridPerfilUsuarios.SelectedItem != null) { reservaSeleccionado = (ReservaBase)DataGridPerfilUsuarios.SelectedItem; }
-            //if (reservaSeleccionado == null)
-            //{
-            //    MessageBox.Show("Por favor, selecciona una usuario para borrar.", "Error !", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
-            //var result = MessageBox.Show($"¿Estás seguro de que quieres eliminar la cuenta seleccionado ?", "Confirmar eliminación", MessageBoxButton.YesNo);
-            //if (result == MessageBoxResult.Yes)
-            //{
-
-            //    var response = await viewModel.EliminarReserva(reservaSeleccionado._id.ToString());
-            //    var resultEliminar = await response.Content.ReadAsStringAsync();
-
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        var status = JsonConvert.DeserializeObject(resultEliminar);
-            //        MessageBox.Show("Correctamente...", "Reserva Eliminada", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Hubo un error al eliminar la Reserva. Por favor, intenta de nuevo.");
-            //    }
-            //}
         }
 
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {
-            var selectedReservation = DataGridAdquisiciones.SelectedItem as Adquisicion;
+            var selectAdquisicion = DataGridAdquisiciones.SelectedItem as Adquisicion;
 
-            if (selectedReservation != null)
+            if (selectAdquisicion != null)
             {
-                InfoAdquisicion info = new InfoAdquisicion(selectedReservation);
+                InfoAdquisicion info = new InfoAdquisicion(selectAdquisicion);
                 info.Owner = this;
                 info.ShowDialog();
             }
