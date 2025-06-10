@@ -71,20 +71,47 @@
 
                     <Image  Grid.Row="2" HorizontalAlignment="Center" Source="/View/Reservas/Logo-BasketGlobal.png" Width="290" Margin="0,18,0,28"/>
 
-                    <Border x:Name="menu" Background="DarkOrange" Grid.Row="3" CornerRadius="20" Margin="50,20">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                    <Grid Grid.Row="3" Margin="50,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                            </Grid.ColumnDefinitions>
+                        <!-- Border para el botón Usuarios -->
+                        <Border Background="DarkOrange" CornerRadius="20" Grid.Column="0" Margin="5,0,5,0">
+                            <Button Template="{DynamicResource BtnsInicio}"
+                            x:Name="btnUsuarios"
+                            Content="Usuarios"
+                            Foreground="White"
+                            Style="{StaticResource BarSide}"
+                            Click="btnUsuarios_Click"/>
+                        </Border>
 
-                            <Button Template="{DynamicResource BtnsInicio}" x:Name="btnUsuarios" Grid.Column="0" Content="Usuarios" Foreground="White" Style="{StaticResource BarSide}" Click="btnUsuarios_Click"/>
-                            <Button Template="{DynamicResource BtnsInicio}" x:Name="btnAdquisiciones" Grid.Column="1"  Content="Adquirir" Foreground="White" Style="{StaticResource BarSide}" Height="30" Margin="107,15,87,0" VerticalAlignment="Top" Click="btnAdquisiciones_Click"/>
-                            <Button Template="{DynamicResource BtnsInicio}" x:Name="btnProductos" Grid.Column="2"  Content="Productos" Foreground="White"  Style="{StaticResource BarSide}" Click="btnProductos_Click"/>
-                        </Grid>
-                    </Border>
+                        <!-- Border para el botón Adquirir -->
+                        <Border Background="DarkOrange" CornerRadius="20" Grid.Column="1" Margin="5,0,5,0">
+                            <Button Template="{DynamicResource BtnsInicio}"
+                            x:Name="btnAdquisiciones"
+                            Content="Adquirir"
+                            Foreground="White"
+                            Style="{StaticResource BarSide}"
+                            Height="30"
+                            Margin="0,15,0,0"
+                            VerticalAlignment="Top"
+                            Click="btnAdquisiciones_Click"/>
+                        </Border>
+
+                        <!-- Border para el botón Productos -->
+                        <Border Background="DarkOrange" CornerRadius="20" Grid.Column="2" Margin="5,0,5,0">
+                            <Button Template="{DynamicResource BtnsInicio}"
+                            x:Name="btnProductos"
+                            Content="Productos"
+                            Foreground="White"
+                            Style="{StaticResource BarSide}"
+                            Click="btnProductos_Click"/>
+                        </Border>
+                    </Grid>
+
                 </Grid>
             </Border>
         </Border>
