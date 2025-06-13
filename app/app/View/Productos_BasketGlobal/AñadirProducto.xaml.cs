@@ -172,7 +172,7 @@ namespace app.View.Productos_BasketGlobal
 
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Habitación agregada con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Producto agregado con éxito", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
                         // Limpiar campos del formulario
                         txtNom.Text = "";
