@@ -61,8 +61,8 @@
                             <Label Content="BasketGlobal" FontSize="27" Margin="5,10,40,0" FontWeight="Bold" MouseDown="TextBlock_MouseDown" Cursor="Hand" />
                         </DockPanel>
                         <Button x:Name="btnUsuarios" Content="Usuarios" Style="{StaticResource BarSide}"/>
-                        <Button x:Name="btnReservas" Content="Adquisiciones" Style="{StaticResource BarSide}" Click="btnReservas_Click" Height="43" Width="243"/>
-                        <Button x:Name="btnHabitaciones" Content="Productos" Width="130" Style="{StaticResource BarSide}" Click="btnHabitaciones_Click"/>
+                        <Button x:Name="btnAdquisiciones" Content="Adquisiciones" Style="{StaticResource BarSide}" Click="btnAdquisiciones_Click" Height="43" Width="243"/>
+                        <Button x:Name="btnProductos" Content="Productos" Width="130" Style="{StaticResource BarSide}" Click="btnProductos_Click"/>
                         <StackPanel VerticalAlignment="Center" Margin="40,0">
                             <!--<Label Content="User Name" Foreground="#8C52FF" FontSize="21" MouseDown="Label_MouseDown" />-->
                             <Menu FontSize="20" Background="Transparent" Foreground="OrangeRed">
