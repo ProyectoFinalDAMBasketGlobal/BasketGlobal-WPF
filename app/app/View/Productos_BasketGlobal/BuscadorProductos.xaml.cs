@@ -202,12 +202,12 @@ namespace app.View.Productos_BasketGlobal
                 var estadoLabel = new Label
                 {
                     Content =
-                    producto.estado || !producto.estado && producto.stock == 0 ? "Estado: No disponible" :
+                    producto.estado && producto.stock == 0 || !producto.estado && producto.stock == 0 ? "Estado: No disponible" :
                     !producto.estado ? "Estado: Descatalogado" :
                     "Estado: Disponible",
                     FontSize = 14,
                     Foreground =
-                    producto.estado || !producto.estado && producto.stock == 0 ? Brushes.Red :
+                    producto.estado && producto.stock == 0 || !producto.estado && producto.stock == 0 ? Brushes.Red :
                     !producto.estado ? Brushes.Orange : Brushes.Green,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Margin = new Thickness(0, 5, 0, 5)
@@ -403,7 +403,7 @@ namespace app.View.Productos_BasketGlobal
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("El resto de los datos del producto se actualizaron correctamente en la API.");
-                    // Aquí puedes recargar la lista de habitaciones si es necesario
+                   
                     Button_Click(null, null);
                 }
                 else
@@ -442,7 +442,7 @@ namespace app.View.Productos_BasketGlobal
                 {
                     MessageBox.Show($"Producto con ID: {producto._id} eliminada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Actualizar la lista de habitaciones
+                   
                     btn_Buscar_Click(null, null); // Asegúrate de que este método recargue la lista correctamente
                 }
                 else
@@ -470,7 +470,7 @@ namespace app.View.Productos_BasketGlobal
                 return;
             }
 
-            // Establecemos soloOfertas en true para filtrar solo habitaciones con ofertas
+            // Establecemos soloOfertas en true para filtrar solo productos con ofertas
             bool cinco = txtOp.IsChecked == true;
             bool diez = txtOp2.IsChecked == true;
             bool veinte = txtOp3.IsChecked == true;
@@ -478,7 +478,7 @@ namespace app.View.Productos_BasketGlobal
 
             var viewModel = new ProductosViewModel();
 
-            // Buscar habitaciones solo con ofertas
+            // Buscar productos solo con ofertas
             var productosEncontrados = await viewModel.BuscarProductos(categoria, cinco, diez, veinte, otros, precioMaximo, true);
 
             // Mostrar resultados
