@@ -361,17 +361,17 @@ namespace app.View.Usuarios.MainUsuarios
             Application.Current.Shutdown();
         }
 
-        private void btnReservas_Click(object sender, RoutedEventArgs e)
+        private void btnAdquisiciones_Click(object sender, RoutedEventArgs e)
         {
-            MainAdquisiciones mainReservas = new MainAdquisiciones();
-            mainReservas.Show();
+            MainAdquisiciones main = new MainAdquisiciones();
+            main.Show();
             this.Close();
         }
-
-        private void btnHabitaciones_Click(object sender, RoutedEventArgs e)
+        
+        private void btnProductos_Click(object sender, RoutedEventArgs e)
         {
-            BuscadorProductos mainHabit = new BuscadorProductos();
-            mainHabit.Show();
+            BuscadorProductos main = new BuscadorProductos();
+            main.Show();
             this.Close();
         }
     }
